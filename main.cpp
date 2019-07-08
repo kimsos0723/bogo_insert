@@ -61,19 +61,17 @@ void insert_sort(data_t& d) {
     }    
 }
 
-int get_random_number() {
+distribution_t get_random_number() {
     random_device rd;
-    mt19937_64 rnd(rd());
-    distribution_t range(0, data.size());    
-    int i=range(rnd);
-    return i;
+    mt19937_64 rnd(rd());          
+    return distribution_t(0, data.size());
 }
 
 void bogo_sort(data_t& d) {
-    int t =0;
+    int t = 0;
     for(int i=0;i<(int)log10(static_cast<double>(d.size()));i++){
-        int l = get_random_number();
-        int r = get_random_number();
+        int l = get_random_number().a();
+        int r = get_random_number().a();
 
         if(d[l] > d[r]) {
             t = d[l];
@@ -87,7 +85,7 @@ int main(int argc, char const *argv[]) {
     clock_t begin, mid, end;     
     
     
-    if(5>sorted_rating(data)) bogo_sort(data);
+    // if(5>sorted_rating(data)) bogo_sort(data);
     begin = clock();
 
     add_anomal_stack(data);
